@@ -1,0 +1,303 @@
+Assignment 1
+
+The RMI (Remote Method Invocation) is an API that provides a mechanism to create distributed application in java. The RMI allows an object to invoke methods on an object running in another JVM.
+
+The RMI provides remote communication between the applications using two objects stub and skeleton.
+
+The stub is an object, acts as a gateway for the client side. All the outgoing requests are routed through it. It resides at the client side and represents the remote object.
+
+The skeleton is an object, acts as a gateway for the server side object. All the incoming requests are routed through it.
+
+The is given the 6 steps to write the RMI program.
+
+1.Create the remote interface
+2.Provide the implementation of the remote interface
+3.Compile the implementation class and create the stub and skeleton objects using the rmic tool
+4.Start the registry service by rmiregistry tool
+5.Create and start the remote application
+6.Create and start the client application
+---------------------------------------------------------------------------------------------------------------------------------------
+Assignment 2 (Calculator)
+
+This code implements a simple client-server application using the CORBA (Common Object Request Broker Architecture) framework. The application provides basic arithmetic operations (sum, subtraction, multiplication, division) through a remote interface.
+
+Let's break down the code into its components:
+
+IDL File (Calc.idl):
+It defines the interface Calc with methods for arithmetic operations (sum, sub, mul, div).
+It also declares an exception DivisionByZero to handle division by zero.
+Server Implementation (CalcServer.java):
+It imports necessary packages from CORBA and Java standard libraries.
+It defines a class CalcImpl that implements the Calc interface.
+It overrides the methods defined in the interface to provide the implementation for arithmetic operations.
+In the main method, it initializes the ORB (Object Request Broker), activates the POA (Portable Object Adapter), creates an instance of CalcImpl, registers it with the ORB, and binds it to a name in the naming service.
+It enters the ORB event loop to wait for client invocations.
+Client Implementation (CalcClient.java):
+It imports necessary packages from CORBA and Java standard libraries.
+In the main method, it initializes the ORB, resolves the reference to the remote object (Calc), and presents a menu-driven interface for the user to perform arithmetic operations.
+It repeatedly prompts the user for choices and performs the selected arithmetic operation by invoking the corresponding method on the remote object.
+It catches exceptions, such as DivisionByZero, and handles them appropriately.
+Explanation:
+The IDL file defines the interface that both the server and client must adhere to.
+The server provides the implementation of the interface and registers it with the ORB.
+The client obtains a reference to the remote object through the naming service and invokes methods on it as if they were local.
+CORBA handles the communication between the client and server transparently.
+Running the Application:
+Compile the IDL file: idlj -fall Calc.idl
+Compile the Java files: javac *.java
+Start the server: java CalcServer
+Start the client: java CalcClient
+Follow the menu prompts in the client to perform arithmetic operations.
+In summary, this code demonstrates how to implement a simple distributed application using CORBA, allowing clients to invoke methods on remote objects provided by the server.
+
+***************************************************
+String reverse
+
+This code represents a simple client-server application using CORBA (Common Object Request Broker Architecture) for string reversal. Let's break down the code:
+
+Client (ReverseClient.java):
+
+Imports necessary packages from CORBA, including the ReverseModule generated from the IDL file.
+In the main method:
+Initializes the ORB.
+Resolves the reference to the naming service.
+Obtains the reference to the remote object named "Reverse" from the naming context.
+Prompts the user to enter a string.
+Reads the string from the console.
+Invokes the reverse_string method on the remote object to reverse the input string.
+Prints the reversed string.
+Server (ReverseImpl.java):
+
+Imports necessary packages.
+Defines a class ReverseImpl that extends the generated ReversePOA (Portable Object Adapter).
+In the constructor:
+Calls the superclass constructor and prints a message indicating that the reverse object is created.
+Implements the reverse_string method:
+Reverses the input string using a StringBuffer.
+Returns the reversed string with a prefix "Server Send".
+Explanation:
+
+The client and server communicate using CORBA, which provides a mechanism for distributed object communication.
+The IDL file defines the interface Reverse, which specifies the reverse_string method for string reversal.
+The server implements the Reverse interface and registers the implementation with the naming service.
+The client obtains a reference to the remote object from the naming service and invokes methods on it.
+CORBA handles the communication between the client and server transparently.
+Running the Application:
+
+Compile the IDL file: idlj -fall Reverse.idl
+Compile the Java files: javac *.java
+Start the server: java ReverseImpl
+Start the client: java ReverseClient
+Enter a string when prompted in the client application to see the reversed string printed by the server.
+In summary, this code demonstrates how to implement a simple client-server application using CORBA for string reversal.
+
+This code represents a CORBA server application that provides a remote object for string reversal.
+
+Let's break down the code:
+
+Imports:
+Imports necessary packages from CORBA, including the ReverseModule generated from the IDL file.
+Main Method:
+The main method initializes the ORB and sets up the Portable Object Adapter (POA).
+It activates the POA manager to start processing requests.
+It creates an instance of the ReverseImpl class, which implements the functionality for string reversal.
+It obtains an object reference from the servant class (ReverseImpl) using the POA.
+It retrieves the naming service reference and resolves it to a NamingContextExt.
+It binds the object reference to a name in the naming service.
+Finally, it enters the ORB event loop to wait for client invocations.
+Explanation:
+
+The server provides a remote object for string reversal using CORBA.
+It initializes the ORB and sets up the POA to handle incoming requests.
+The ReverseImpl class implements the functionality for string reversal.
+The server registers the ReverseImpl object with the naming service, making it accessible to clients.
+The ORB event loop processes client requests asynchronously.
+Running the Application:
+
+Compile the IDL file: idlj -fall Reverse.idl
+Compile the Java files: javac *.java
+Start the server: java ReverseServer
+Once the server is running, it will be ready to receive requests from client applications.
+
+In summary, this code demonstrates how to implement a CORBA server application that provides a remote object for string reversal.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Assignment 3
+
+This code demonstrates parallel computing using MPI (Message Passing Interface) in Python, specifically with the mpi4py library. MPI allows for distributed computing, where multiple processes can work together on a task, communicating with each other by passing messages.
+
+Let's break down the code:
+
+Importing Libraries: The code starts by importing the necessary libraries: MPI from mpi4py and numpy as np.
+Function Definition: distribute_elements: This function takes an array and a communicator object (comm) as arguments. It is responsible for distributing elements of the array among processes, computing the local sum for each process, and returning the local sum.
+Main Section:
+It initializes MPI by creating a communicator object comm representing all the processes.
+It retrieves the rank of the current process using comm.Get_rank().
+If the process is rank 0 (the root process):
+It creates an array with 8 elements [1, 2, 3, 4, 5, 6, 7, 8].
+For all other processes:
+It initializes the array as None.
+It broadcasts the array from the root process (rank 0) to all processes using comm.bcast().
+It calls the distribute_elements() function to compute the local sum of elements for each process.
+It gathers all the local sums from all processes to the root process using comm.gather().
+Printing the Total Sum:
+Only the root process (rank 0) computes the total sum by adding all the individual sums.
+It prints the total sum.
+This code demonstrates a basic example of parallel computing using MPI. Each process performs a part of the computation, and MPI handles communication between processes to coordinate their actions. In this case, it distributes elements of an array among processes, computes local sums, and then gathers all the local sums to compute the total sum.
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment 4
+
+This Java code represents a simple implementation of a Time Server that synchronizes clocks using the Berkeley algorithm. Let's break down the code:
+
+Import Statements:
+The code starts with importing necessary packages from the Java standard library (java.util.List and java.util.ArrayList).
+TimeServer Class:
+The TimeServer class is defined, which encapsulates the functionality of synchronizing clocks.
+It has a private instance variable clocks of type List<Integer> to store the clocks' times.
+Constructor:
+The TimeServer constructor takes a list of integers representing initial clock times and initializes the clocks list with them.
+synchronizeClocks() Method:
+This method synchronizes the clocks using the Berkeley algorithm.
+It calculates the sum of all clocks' times and then computes the average time.
+After computing the average time, it adjusts each clock's time to match the average time.
+getClocks() Method:
+This method simply returns the list of clocks.
+Main Method:
+In the main method:
+A list of clocks is created with their initial times (100, 200, 150, 180).
+An instance of the TimeServer class is created with the list of clocks.
+The synchronizeClocks() method is called to synchronize the clocks using the Berkeley algorithm.
+The synchronized clocks are obtained using the getClocks() method.
+Finally, the synchronized clock times are printed.
+Output:
+The code prints the synchronized clock times after running the main method.
+Overall, this code demonstrates a basic implementation of a Time Server that synchronizes clocks using the Berkeley algorithm. It calculates the average time and adjusts each clock's time accordingly to synchronize them.
+------------------------------------------------------------------------------------------------------------------------------------------
+Assignment 5
+
+
+This Java code represents a simplified implementation of the token ring network communication protocol. Let's break down the code:
+
+Import Statements:
+The code imports necessary packages from the Java standard library (java.util.* and java.util.concurrent.TimeUnit).
+tokenring Class:
+The tokenring class is defined, representing the main class of the program.
+main Method:
+The main method is the entry point of the program.
+It initializes a Scanner object to read user input.
+Printing Nodes:
+It prompts the user to enter the number of nodes in the token ring network.
+It then prints the node numbers from 0 to nodes - 1, followed by node 0 again, representing the circular nature of the token ring network.
+Getting Sender, Receiver, and Data:
+It prompts the user to enter the sender's node number, receiver's node number, and the data to be sent.
+Token Passing:
+The program simulates the token passing process in the token ring network.
+It starts with the initial token position (0) and keeps passing the token until it reaches the sender's node.
+During the token passing, it prints the current node number to indicate the token's movement.
+It uses TimeUnit.SECONDS.sleep(1) to introduce a delay of 1 second between each token pass, simulating the passage of time.
+Sending Data:
+Once the token reaches the sender's node, it indicates that the token is now with the sender.
+It then prints a message indicating that the sender is sending the specified data.
+After that, it simulates the data transmission process from the sender to the receiver by iterating through the nodes between the sender and receiver.
+During data transmission, it prints the current node number to indicate the data's movement.
+Again, it introduces a delay of 1 second between each node to simulate the passage of time.
+Receiving Data:
+Once the data reaches the receiver's node, it prints a message indicating that the receiver has received the data.
+Updating Token:
+Finally, it updates the token position to the sender's node, completing the token ring communication cycle.
+Closing Scanner:
+It closes the Scanner object to release system resources.
+Overall, this code demonstrates a basic simulation of token passing and data transmission in a token ring network using Java.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment 6
+
+
+This Java code implements the Bully Algorithm, a leader election algorithm used in distributed systems to elect a coordinator or leader among the processes. Let's break down the code:
+
+Bully Class:
+The Bully class is defined to encapsulate the Bully Algorithm's functionality.
+It contains instance variables coordinator to store the current coordinator's process ID, max_processes to store the maximum number of processes, and processes as a boolean array to represent the status of each process (up or down).
+Constructor:
+The constructor Bully(int max) initializes the Bully object with the maximum number of processes.
+It initializes the processes array with all processes initially up (true), and it sets the coordinator to the process with the highest ID.
+displayProcesses() Method:
+This method displays the status of each process (up or down) and prints the current coordinator's process ID.
+upProcess() Method:
+This method brings a process up by setting its corresponding entry in the processes array to true.
+downProcess() Method:
+This method brings a process down by setting its corresponding entry in the processes array to false.
+runElection() Method:
+This method initiates the election process starting from the given process ID.
+It sends election messages to processes with higher IDs and waits for responses.
+If it receives no response from any process with a higher ID, it declares itself as the coordinator.
+Main Method:
+The main method is the entry point of the program.
+It presents a menu-driven interface to interact with the Bully Algorithm functionalities.
+It repeatedly prompts the user for choices and performs corresponding actions:
+Creating processes, displaying processes, bringing a process up or down, running the election algorithm, or exiting the program.
+Switch Statement:
+It handles user choices and calls the appropriate methods based on the selected option.
+Scanner Usage:
+It uses a Scanner object to read user input from the console.
+Overall, this code provides a comprehensive implementation of the Bully Algorithm, allowing users to create, manage, and elect coordinators among a set of processes in a distributed system.
+
+********
+
+This Java code implements the Ring Algorithm, a distributed algorithm used for leader election in a ring topology of processes. Let's break down the code:
+
+Ring Class:
+The Ring class encapsulates the functionality of the Ring Algorithm.
+It contains instance variables max_processes to store the total number of processes, coordinator to store the process ID of the current coordinator, processes as a boolean array to represent the status of each process (up or down), and pid as an ArrayList<Integer> to store the process IDs during the election.
+Constructor:
+The constructor Ring(int max) initializes the Ring object with the maximum number of processes.
+It initializes the processes array with all processes initially up (true) and sets the coordinator to the process with the highest ID.
+It also initializes an empty ArrayList<Integer> pid to store process IDs during the election.
+displayProcesses() Method:
+This method displays the status of each process (up or down) and prints the current coordinator's process ID.
+upProcess() Method:
+This method brings a process up by setting its corresponding entry in the processes array to true.
+downProcess() Method:
+This method brings a process down by setting its corresponding entry in the processes array to false.
+displayArrayList() Method:
+This method displays the contents of the pid ArrayList.
+initElection() Method:
+This method initiates the election process starting from the given process ID.
+It adds the current process ID to the pid ArrayList and then iterates through the ring, adding the IDs of the processes that are up.
+After iterating through the ring, it declares the process with the maximum ID in pid as the coordinator and clears the pid ArrayList.
+Main Method:
+The main method is the entry point of the program.
+It presents a menu-driven interface to interact with the Ring Algorithm functionalities.
+It repeatedly prompts the user for choices and performs corresponding actions:
+Creating processes, displaying processes, bringing a process up or down, running the election algorithm, or exiting the program.
+Switch Statement:
+It handles user choices and calls the appropriate methods based on the selected option.
+Scanner Usage:
+It uses a Scanner object to read user input from the console.
+Overall, this code provides a comprehensive implementation of the Ring Algorithm, allowing users to create, manage, and elect coordinators among a set of processes in a ring topology.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment 7
+
+
+This code demonstrates a simple Flask application serving a "Hello, World!" message and a separate Python script that sends a GET request to the Flask web service and prints the response.
+
+Let's break down the code:
+
+Flask Application (app.py):
+It imports the Flask class from the flask module.
+It creates an instance of the Flask class with the name app.
+It defines a route /hello using the @app.route() decorator. When a GET request is made to this route, the hello() function is called.
+The hello() function returns the string 'Hello, World!'.
+Finally, if the script is executed directly (not imported), it starts the Flask development server using app.run().
+Web Service Consumer (disapp.py):
+It imports the requests module, which is used to send HTTP requests.
+It defines the URL of the Flask web service as 'http://localhost:5000/hello'.
+It sends a GET request to the specified URL using requests.get(url).
+It prints the response text received from the web service.
+When you run the Flask application (app.py), it starts a web server on localhost at port 5000. When you run the web service consumer script (disapp.py), it sends a GET request to the Flask web service's /hello route. The Flask application responds with the string 'Hello, World!', which is printed by the web service consumer script.
+
+Make sure to run the Flask application (app.py) first before running the web service consumer script (disapp.py). Also, ensure that you have the Flask and requests modules installed (pip install Flask requests).
