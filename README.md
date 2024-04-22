@@ -17,30 +17,30 @@ Terminal 3
 Java Client.ClientMain
 
 ****Assign_2 (Calculator)****
-### Terminal 1
+Terminal 1
 idlj -fall Calc.idl
 (if issue occured try this command )
 sudo apt install openjdk-8-jdk-headless
 sudo apt update
 
-### Terminal 2
+Terminal 2
 javac CalcApp/*.java CalcApp/CalcPackage/*.java CalcClient.java CalcServer.java
 orbd -ORBInitialPort 1050 -ORBInitialHost localhost &
 
-### Terminal 3
+Terminal 3
 java -cp .:target/dependency/* CalcServer -ORBInitialPort 1050 -ORBInitialHost localhost
 
-### Terminal 4
+Terminal 4
 java -cp .:target/dependency/* CalcClient -ORBInitialPort 1050 -ORBInitialHost localhost
 
 **ASSIGN_2 (Reverse string)**
-###Terminal 1:
+Terminal 1:
 idlj -fall ReverseModule.idl
 javac *.java ReverseModule/*.java
 orbd -ORBInitialPort 1056&
 java ReverseServer -ORBInitialPort 1056&
 
-###Terminal 2:
+Terminal 2:
 java ReverseClient -ORBInitialPort 1056 -ORBInitialHost localhost
 
 **ASSIGN_3**
@@ -62,7 +62,7 @@ python3 filename.py
 ###Terminal 1: (first run this)
 python3 server.py
 
-###Terminal 2: (then run this)
+Terminal 2: (then run this)
 python3 client.py
 
 ASSIGN_4 (classroom)
@@ -87,9 +87,9 @@ Step 3(terminal 2): python3 distributed_app.py
 Step 4: Open  http://localhost:5000/hello for output.
 
 **ASSIGN_9 (Content Beyond Syllabus):**
-###Terminal 1:
+Terminal 1:
 javac *.java
 java Server
 
-###Terminal 2:
+Terminal 2:
 java Client
