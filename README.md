@@ -1,22 +1,22 @@
 **Pre-requisites:**
-**Install JDK-8
+Install JDK-8
  sudo apt-get remove openjdk*
  sudo apt update
  sudo apt install openjdk-8-jdk openjdk-8-jre
 
 
 **ASSIGN_1**
-### Terminal 1
+Terminal 1
 javac Client/*.java  && javac Server/*.java
 rmiregistry 5000
 
-### Terminal 2
+Terminal 2
 java Server.ServerMain
 
-### Terminal 3
+Terminal 3
 Java Client.ClientMain
 
-**Assign_2 (Calculator)**
+****Assign_2 (Calculator)****
 ### Terminal 1
 idlj -fall Calc.idl
 (if issue occured try this command )
