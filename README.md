@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assignment Readme</title>
+
 </head>
 <body>
 
@@ -89,6 +89,92 @@ java ReverseServer -ORBInitialPort 1056&amp;
 <li><strong>Compile and run:</strong></li>
 <pre><code>javac -cp $MPJ_HOME/lib/mpj.jar ArrSum.java
 $MPJ_HOME/bin/mpjrun.sh -np 4 ArrSum
+</code></pre>
+</ol>
+
+<h3>Assignment 3 (Classroom)</h3>
+
+<ol>
+<li><strong>Setup:</strong></li>
+<pre><code>sudo apt update
+sudo apt install python3-pip
+sudo apt-get install mpich # for MPICH
+pip install mpi4py --upgrade
+</code></pre>
+
+<li><strong>Run:</strong></li>
+<pre><code>python3 filename.py
+</code></pre>
+</ol>
+
+<h3>Assignment 4</h3>
+
+<ol>
+<li><strong>Terminal 1:</strong></li>
+<pre><code>python3 server.py
+</code></pre>
+
+<li><strong>Terminal 2:</strong></li>
+<pre><code>python3 client.py
+</code></pre>
+</ol>
+
+<h3>Assignment 4 (Classroom)</h3>
+
+<ol>
+<li><strong>Setup:</strong></li>
+<pre><code>sudo apt install openjdk-11-jre-headless
+</code></pre>
+
+<li><strong>Run:</strong></li>
+<pre><code>java assignment4.java
+</code></pre>
+</ol>
+
+<h3>Assignment 5</h3>
+
+<pre><code>javac Tring.java
+java Tring
+</code></pre>
+
+<h3>Assignment 6</h3>
+
+<pre><code>javac Bully.java
+java Bully
+
+javac Ring.java
+java Ring
+</code></pre>
+
+<h3>Assignment 7</h3>
+
+<ol>
+<li><strong>Step 1:</strong></li>
+<pre><code>pip install flask
+</code></pre>
+
+<li><strong>Step 2 (Terminal 1):</strong></li>
+<pre><code>python3 app.py
+</code></pre>
+
+<li><strong>Step 3 (Terminal 2):</strong></li>
+<pre><code>python3 distributed_app.py
+</code></pre>
+
+<li><strong>Step 4:</strong></li>
+<p>Open <a href="http://localhost:5000/hello">http://localhost:5000/hello</a> for output.</p>
+</ol>
+
+<h3>Assignment 9 (Content Beyond Syllabus)</h3>
+
+<ol>
+<li><strong>Terminal 1:</strong></li>
+<pre><code>javac *.java
+java Server
+</code></pre>
+
+<li><strong>Terminal 2:</strong></li>
+<pre><code>java Client
 </code></pre>
 </ol>
 
